@@ -1,0 +1,21 @@
+# .NET
+bin/
+obj/
+.vs/
+*.user
+
+# Angular / Node
+node_modules/
+dist/
+.angular/
+npm-debug.log*
+
+# Editors
+.vscode/
+.idea/
+
+# Secrets / local config
+appsettings.Local.json
+appsettings.*.Local.json
+*.pfx
+*.env

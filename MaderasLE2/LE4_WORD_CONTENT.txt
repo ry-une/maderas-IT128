@@ -1,0 +1,42 @@
+LE4-1-MADERAS.docx - COPY/PASTE STRUCTURE
+=========================================
+
+LAB EXERCISE 4
+Basic Blog API with ASP.NET Core 6
+Name: Ryan Joseph V. Maderas
+
+SCREENSHOTS
+
+1. Login Request - Postman
+[Insert 01_Login_Postman.png]
+
+2. Register Request - Postman
+[Insert 02_Register_Postman.png]
+
+3. List Post Request - Postman
+[Insert 03_ListPosts_Postman.png]
+
+4. Post Details Request - Postman
+[Insert 04_PostDetails_Postman.png]
+
+5. Add Post Request - Postman
+[Insert 05_AddPost_Postman.png]
+
+6. Users Table with Solution Explorer
+[Insert 06_UsersTable_SolutionExplorer.png]
+
+7. Expanded Postman Collection
+[Insert 07_PostmanCollection_Expanded.png]
+
+SOURCE CODE
+
+LoginController.cs
+[Copy the COMPLETE current BlogAPI/Controllers/LoginController.cs here]
+
+PostController.cs
+[Copy the COMPLETE current BlogAPI/Controllers/PostController.cs here]
+
+NOTE ABOUT THE REGISTRATION VALUE
+The LE4 PDF asks for the full name with no spaces as username and password. The existing LE2/LE3 Users table limits both fields to NVARCHAR(16), while RyanJosephVMaderas is 18 characters. The existing schema was preserved, so RyanJosephVMader was used as the 16-character assignment-style test value.
+
+Required filename: LE4-1-MADERAS.docx

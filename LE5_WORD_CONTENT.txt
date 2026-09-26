@@ -1,0 +1,79 @@
+LE5-1-MADERAS.docx - COPY/PASTE STRUCTURE
+=========================================
+
+LAB EXERCISE 5
+Frontend Angular Project
+Name: Ryan Joseph V. Maderas
+
+SCREENSHOTS
+(see LE5_SCREENSHOT_CHECKLIST.txt for exactly what each one must show)
+
+1. List Posts Page
+[Insert 01_ListPosts_Page.png]
+
+2. List Posts - Title Link
+[Insert 02_ListPosts_TitleLink.png]
+
+3. Post Detail Page
+[Insert 03_PostDetail_Page.png]
+
+4. Register Page
+[Insert 04_Register_Page.png]
+
+5. Login Page
+[Insert 05_Login_Page.png]
+
+6. Login - Session Storage Token
+[Insert 06_Login_DevTools_Token.png]
+
+7. Backend Running / No CORS Errors
+[Insert 07_Backend_Terminal_CORS.png]
+
+8. Entire Project Folder Path (IDE)
+[Insert 08_ProjectFolder_IDE.png]
+
+9. GitHub Repository (optional)
+[Insert 09_GitHub_Repo.png]
+
+SOURCE CODE
+Paste the COMPLETE, current contents of each file below, in this order. This is every file that was created or changed for LE5 - nothing required should be missing if all of these are included.
+
+Models
+- MADERASLE4/frontend/src/app/models/post.model.ts
+
+List Posts Component
+- MADERASLE4/frontend/src/app/components/list-posts/list-posts.component.ts
+- MADERASLE4/frontend/src/app/components/list-posts/list-posts.component.html
+
+Post Detail Component
+- MADERASLE4/frontend/src/app/components/post-detail/post-detail.component.ts
+- MADERASLE4/frontend/src/app/components/post-detail/post-detail.component.html
+
+Login Page Component
+- MADERASLE4/frontend/src/app/components/login-page/login-page.component.ts
+- MADERASLE4/frontend/src/app/components/login-page/login-page.component.html
+
+Register Page Component
+- MADERASLE4/frontend/src/app/components/register-page/register-page.component.ts
+- MADERASLE4/frontend/src/app/components/register-page/register-page.component.html
+
+Services
+- MADERASLE4/frontend/src/app/services/token-storage.service.ts
+- MADERASLE4/frontend/src/app/services/auth.service.ts
+
+App Shell / Routing
+- MADERASLE4/frontend/src/app/app.module.ts
+- MADERASLE4/frontend/src/app/app-routing.module.ts
+- MADERASLE4/frontend/src/app/app.component.html
+
+Backend Change (for CORS - the only LE5 backend edit)
+- MaderasLE2/BlogAPI/Program.cs
+
+NOTE ABOUT LOGIN/REGISTER RESPONSE HANDLING
+The LE5 PDF's own login sample expects the API to return an object with id_token and id. The REAL BlogAPI LoginController returns only a raw JWT text string with no user id (confirmed by reading LoginController.cs directly, not assumed). To avoid breaking the working LE4 backend, the Angular AuthService and LoginPageComponent were written for the raw-string response using responseType: 'text', and no fabricated user id is saved. This should be called out briefly in the report/reflection section if one is required.
+
+NOTE ABOUT VERSIONS
+Angular 15.2.10 was used (Angular CLI 15.2.11, TypeScript 4.9.5) for compatibility with Node 16.16 and the traditional NgModule structure (app.module.ts / app-routing.module.ts) shown in the PDF, since newer Angular majors require Node 18+ and default to standalone components.
+
+Required filename: LE5-1-MADERAS.docx
+GitHub link (paste at the end of the document): https://github.com/ry-une/maderas-IT128

@@ -1,0 +1,85 @@
+IT128L - LE4: Basic Blog API - FINAL SETUP NOTES
+Ryan Joseph V. Maderas
+=================================================
+
+1. OPEN THE SOLUTION
+- Open MaderasLE2.slnx in Visual Studio.
+- Set BlogAPI as the Startup Project.
+- Let Visual Studio restore NuGet packages, then Build Solution (Ctrl+Shift+B).
+
+2. BLOGAPI SETTINGS
+- Target framework: .NET 6.0
+- HTTPS: https://localhost:7161
+- HTTP:  http://localhost:5161
+- Swagger: https://localhost:7161/swagger
+- Database: existing LocalDB BlogDB
+- SqlDb: Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=BlogDB;Integrated Security=True;
+
+3. NUGET PACKAGES USED BY BlogAPI
+- Microsoft.AspNetCore.Authentication.JwtBearer 6.0.36
+- Microsoft.IdentityModel.Tokens 6.35.0
+- Swashbuckle.AspNetCore 6.5.0
+- System.IdentityModel.Tokens.Jwt 6.35.0
+
+Claude's sandbox could not access nuget.org, so the REAL package restore/build must be verified once in your Visual Studio. Do not treat the sandbox stand-in compile as final proof.
+
+4. POSTMAN
+Import: MADERAS_LE4.postman_collection.json
+Collection name: MADERASLE3 (kept because the LE4 PDF says <LASTNAMELE3>)
+Collection variables:
+- baseUrl = https://localhost:7161
+- token = automatically populated by Login Request after a successful login
+
+Run the requests in this order for the cleanest grading evidence:
+
+A. Login Request
+POST {{baseUrl}}/api/Login/login
+Existing valid LE3 account already in BlogDB:
+{
+  "userName": "rjvmaderas",
+  "password": "2024108288"
+}
+Expected: 200 with JWT. The test script auto-saves it to {{token}}.
+
+B. Register Request
+POST {{baseUrl}}/api/Login/register
+{
+  "userName": "RyanJosephVMader",
+  "firstName": "Ryan Joseph V.",
+  "lastName": "Maderas",
+  "password": "RyanJosephVMader"
+}
+Expected: 200 "User registered."
+
+IMPORTANT PDF/database conflict:
+The PDF asks for the full name with no spaces for username AND password. "RyanJosephVMaderas" is 18 characters, but the existing LE2/LE3 Users table uses NVARCHAR(16) for both UserName and Password. The database schema was intentionally NOT changed. RyanJosephVMader is the 16-character assignment-style fallback.
+
+C. List Post Request
+GET {{baseUrl}}/api/Post
+Expected: 200 with post list.
+
+D. Post Details Request
+GET {{baseUrl}}/api/Post/1
+Expected: 200 with post ID 1 details.
+
+E. Add Post Request
+POST {{baseUrl}}/api/Post/add
+Authorization: Bearer {{token}}
+Body:
+{
+  "title": "Maderas, Ryan Joseph V. has posted this through Postman!",
+  "body": "this is a blog post coming from postman!"
+}
+Expected: 200 "Post created."
+
+5. IF HTTPS FAILS IN POSTMAN
+First trust the Visual Studio development certificate if prompted. If Postman reports only a local certificate verification error, either disable SSL certificate verification for local testing or temporarily set the collection baseUrl to http://localhost:5161. Do not change Jwt Issuer/Audience unless the API itself reports issuer/audience validation errors.
+
+6. WHAT YOU STILL NEED TO DO
+- Real NuGet restore/build in Visual Studio.
+- Run BlogAPI against your actual LocalDB BlogDB.
+- Run the 5 Postman requests and take the required screenshots.
+- Take the Users table + expanded Solution Explorer screenshot.
+- Take the expanded Postman collection screenshot.
+- Put screenshots + full LoginController.cs + PostController.cs into LE4-1-MADERAS.docx.
+- Record LE4-VID-MADERAS.mp4 demonstrating GET and POST requests in Postman.

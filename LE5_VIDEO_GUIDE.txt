@@ -1,0 +1,40 @@
+IT128L - LE5: SHORTEST RUBRIC-COMPLETE VIDEO GUIDE
+Ryan Joseph V. Maderas
+Final filename: LE5-VID-MADERAS.mp4
+==================================================
+
+Target: about 2-3 minutes. Have BlogAPI running before you start recording; start the recording with `ng serve` already compiled so there's no dead air waiting for the build.
+
+1. INTRO - 10 sec
+Show the VS Code Explorer with MADERASLE4/frontend expanded.
+Narration: "This is my Lab Exercise 5 Angular frontend for the blog API, running against my existing Lab Exercise 4 backend."
+
+2. LIST POSTS - 25 sec
+Open http://localhost:4200/, show the list of posts rendering with title, author, and date. Open DevTools console to show the logged posts array.
+Narration: "The root route shows all posts, retrieved from GET /api/Post. The console confirms the data returned by the backend."
+
+3. POST DETAIL - 20 sec
+Click a post title, land on /posts/{id}, show the full detail including body.
+Narration: "Clicking a title navigates to the post detail route, which calls GET /api/Post/{id} and shows the full post body."
+
+4. REGISTER - 30 sec
+Go to /register, fill in a new username (16 characters or fewer), password, first name, last name. Submit and show the redirect to /login.
+Narration: "The Register page posts to /api/Login/register. On success it redirects to the login page."
+
+5. LOGIN - 30 sec
+On /login, enter the credentials just registered (or the existing test account), submit, show the app landing back on the post list.
+Narration: "Login posts to /api/Login/login. The backend returns a raw JWT, which is saved to session storage, and the app redirects back to the posts page."
+
+6. TOKEN PROOF - 15 sec
+Open DevTools > Application > Session Storage, show the auth-token entry with the JWT value.
+Narration: "This confirms the JWT was received and stored after login."
+
+7. CORS / BACKEND - 10 sec
+Briefly switch to the terminal/Visual Studio window showing BlogAPI running, with no CORS errors visible in the browser console throughout the demo.
+Narration: "The backend was updated with a CORS policy so the Angular app on port 4200 can call it directly."
+
+8. CLOSE - 10 sec
+Return to the post list.
+Narration: "That covers listing posts, viewing details, registering, and logging in through the new Angular frontend."
+
+No background music needed. Keep the URL bar, console, and network responses visible throughout - that's the evidence the professor is grading against.

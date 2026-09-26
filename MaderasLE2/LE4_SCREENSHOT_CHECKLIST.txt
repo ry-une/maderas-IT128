@@ -1,0 +1,63 @@
+IT128L - LE4: REQUIRED SCREENSHOT CHECKLIST
+Ryan Joseph V. Maderas
+===========================================
+
+These are aligned to the LE4 PDF. Save them in this order:
+
+01_Login_Postman.png
+- Postman Login Request
+- Method POST
+- Login URL visible
+- JSON body visible if practical
+- Successful response pane showing the JWT token
+
+02_Register_Postman.png
+- Postman Register Request
+- Method POST
+- Register URL visible
+- Registration JSON body/result visible
+- Successful response visible
+
+03_ListPosts_Postman.png
+- Postman List Post Request
+- Method GET
+- Response showing the list of posts
+
+04_PostDetails_Postman.png
+- Postman Post Details Request
+- Method GET
+- Request is for post ID 1
+- Response showing post details
+
+05_AddPost_Postman.png
+- Postman Add Post Request
+- Method POST
+- Bearer authorization applied
+- Required title/body request
+- Successful response visible
+
+06_UsersTable_SolutionExplorer.png
+- Visual Studio Users table data view visible
+- Registered test user visible
+- Entire Solution Explorer included in the SAME screenshot
+- Project folders expanded enough to clearly show the full solution structure, especially BlogAPI and its Controllers
+
+07_PostmanCollection_Expanded.png
+- Postman window
+- MADERASLE3 collection expanded
+- All required requests visible in the sidebar:
+  Login Request
+  Register Request
+  List Post Request
+  Post Details Request
+  Add Post Request
+
+WORD FILE REQUIREMENTS
+- Put ALL screenshots above into the Word file.
+- Copy/paste ALL code from LoginController.cs.
+- Copy/paste ALL code from PostController.cs.
+- Filename: LE4-1-MADERAS.docx
+
+VIDEO REQUIREMENT
+- Demonstrate GET and POST requests in Postman.
+- Filename: LE4-VID-MADERAS.mp4

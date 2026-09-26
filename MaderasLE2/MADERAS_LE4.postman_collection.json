@@ -1,0 +1,208 @@
+{
+  "info": {
+    "_postman_id": "412b7cfe-8b50-4029-b22a-fb8cb70e97da",
+    "name": "MADERASLE3",
+    "description": "Lab Exercise 4 - Basic Blog API (BlogAPI, ASP.NET Core 6). Named MADERASLE3 because the PDF says <LASTNAMELE3>; rename freely.\n\nVariables: baseUrl (API base URL) and token (JWT, filled automatically by Login Request).\nOrder: Register Request (once) -> Login Request -> List Post -> Post Details -> Add Post.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://localhost:7161",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Login Request",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/Login/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "Login",
+            "login"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"userName\": \"rjvmaderas\",\n    \"password\": \"2024108288\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "description": "Uses the same test account that Register Request creates. Send Register Request once first, or replace these two values with an existing LE3 account. On success the JWT is saved to the 'token' collection variable automatically."
+      },
+      "response": [],
+      "protocolProfileBehavior": {
+        "strictSSL": false
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Login returns 200 and a token', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "if (pm.response.code === 200) {",
+              "    // The API returns the JWT as a plain string. Strip quotes in case a JSON-encoded string ever comes back.",
+              "    var jwt = pm.response.text().replace(/^\"|\"$/g, '').trim();",
+              "    pm.collectionVariables.set('token', jwt);",
+              "}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Register Request",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/Login/register",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "Login",
+            "register"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"userName\": \"RyanJosephVMader\",\n    \"firstName\": \"Ryan Joseph V.\",\n    \"lastName\": \"Maderas\",\n    \"password\": \"RyanJosephVMader\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "description": "Users.UserName and Users.Password are NVARCHAR(16) in the existing database, so the 18-character full name RyanJosephVMaderas does not fit. See LE4_SETUP.txt section 8. Send once - the API does not check for duplicate usernames."
+      },
+      "response": [],
+      "protocolProfileBehavior": {
+        "strictSSL": false
+      }
+    },
+    {
+      "name": "List Post Request",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/Post",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "Post"
+          ]
+        }
+      },
+      "response": [],
+      "protocolProfileBehavior": {
+        "strictSSL": false
+      }
+    },
+    {
+      "name": "Post Details Request",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/Post/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "Post",
+            "1"
+          ]
+        }
+      },
+      "response": [],
+      "protocolProfileBehavior": {
+        "strictSSL": false
+      }
+    },
+    {
+      "name": "Add Post Request",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/Post/add",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "Post",
+            "add"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\": \"Maderas, Ryan Joseph V. has posted this through Postman!\",\n    \"body\": \"this is a blog post coming from postman!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "description": "Requires the JWT (Authorization tab = Bearer Token = {{token}}). Run Login Request first; tokens expire after 15 minutes."
+      },
+      "response": [],
+      "protocolProfileBehavior": {
+        "strictSSL": false
+      }
+    }
+  ]
+}

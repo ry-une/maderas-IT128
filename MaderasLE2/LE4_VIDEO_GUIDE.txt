@@ -1,0 +1,36 @@
+IT128L - LE4: SHORTEST RUBRIC-COMPLETE VIDEO GUIDE
+Ryan Joseph V. Maderas
+Final filename: LE4-VID-MADERAS.mp4
+==================================================
+
+Target: about 2-3 minutes. Keep the recording in Postman because the PDF specifically asks for GET and POST request demonstration in Postman.
+
+1. INTRO - 10 sec
+Show the expanded MADERASLE3 collection.
+Narration: "This is my Lab Exercise 4 Basic Blog API demonstration. I will demonstrate the required POST and GET requests in Postman."
+
+2. LOGIN POST - 25 sec
+Open Login Request, Send, show 200 + JWT.
+Narration: "The Login POST request authenticates an existing user and returns a JWT token. The collection automatically stores this token for the authorized Add Post request."
+
+3. REGISTER POST - 25 sec
+Open Register Request, Send, show successful response.
+Narration: "The Register POST request sends the username, first name, last name, and password to the API and creates the user through the existing data library."
+
+4. LIST POSTS GET - 20 sec
+Open List Post Request, Send, show response.
+Narration: "The List Post GET request retrieves all blog posts through the existing ListPosts data method."
+
+5. POST DETAILS GET - 20 sec
+Open Post Details Request for ID 1, Send, show response.
+Narration: "The Post Details GET request retrieves the complete information for post ID one."
+
+6. ADD POST POST - 30 sec
+Open Add Post Request. Briefly show Bearer Token {{token}}, then Body. Send and show 200 "Post created."
+Narration: "The Add Post POST request is protected by JWT authentication. It uses the user ID stored in the token claim and creates the required Postman blog post."
+
+7. CLOSE - 10 sec
+Return to expanded collection.
+Narration: "These requests demonstrate the required GET and POST functionality of the Blog API."
+
+No background music is needed. Keep request URLs, methods, and response status visible.

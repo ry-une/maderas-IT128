@@ -1,0 +1,87 @@
+IT128L - LE5: Angular Frontend - SETUP NOTES
+Ryan Joseph V. Maderas
+=================================================
+
+PROJECT LAYOUT
+- MaderasLE2\            -> existing LE2-LE4 backend solution (BlogAPI, BlogDataLibrary, BlogTestUI, MaderasBlogDB). Unchanged except one CORS addition in Program.cs.
+- MADERASLE4\frontend\   -> NEW Angular LE5 frontend (folder kept as MADERASLE4 per the LE5 PDF's own instruction, even though this is Lab Exercise 5).
+
+WHAT WAS VALIDATED IN THE SANDBOX VS WHAT YOU MUST VERIFY
+- The Angular project was generated with the real Angular CLI (v15.2.11) and built successfully with `ng build` in the sandbox, on the actual files being submitted. That part is real, verified proof.
+- The sandbox has no .NET SDK and no internet access to nuget.org, so BlogAPI's CORS change could NOT be compiled here. It is a small, standard addition (AddCors/UseCors) but you must do a real Build in Visual Studio before recording your video.
+
+--------------------------------------------------
+1. VERIFY NODE VERSION
+--------------------------------------------------
+Open Command Prompt or PowerShell:
+    node -v
+Expected: v16.16.0 (the version the LE5 PDF specifies). If you don't have it yet, download it from:
+    https://nodejs.org/en/blog/release/v16.16.0/
+The frontend's package.json pins an "engines" field of Node 16.13.x-16.x, matching this.
+
+Also verify Angular CLI is available:
+    npm install -g @angular/cli@15
+(Not strictly required - npx ng ... below works without a global install - but useful if you want the plain `ng` command.)
+
+--------------------------------------------------
+2. INSTALL FRONTEND DEPENDENCIES
+--------------------------------------------------
+    cd MADERASLE4\frontend
+    npm install
+All Angular/CLI/TypeScript/RxJS versions are pinned EXACTLY in package.json (no ^ or ~), so this will install the same versions that were build-tested: Angular 15.2.10, Angular CLI 15.2.11, TypeScript 4.9.5, RxJS 7.8.2, zone.js 0.12.0. A package-lock.json is included for the same reason.
+
+--------------------------------------------------
+3. RUN THE ASP.NET BACKEND
+--------------------------------------------------
+    - Open MaderasLE2\MaderasLE2.slnx in Visual Studio.
+    - Set BlogAPI as the Startup Project.
+    - Build the solution (Ctrl+Shift+B) - confirm no errors, especially around the new CORS lines in Program.cs.
+    - Run it (F5 or Ctrl+F5). Confirm it's listening on:
+        https://localhost:7161
+        http://localhost:5161
+    - The first time you run it, Windows/Visual Studio may prompt you to trust the local HTTPS development certificate - click Yes.
+
+--------------------------------------------------
+4. RUN ANGULAR
+--------------------------------------------------
+In a second terminal (keep BlogAPI running in the first one):
+    cd MADERASLE4\frontend
+    npx ng serve --open
+This compiles the app and opens it at http://localhost:4200 automatically.
+
+--------------------------------------------------
+5. OPEN / USE THE FRONTEND
+--------------------------------------------------
+    - http://localhost:4200/          -> Post list (calls GET /api/Post)
+    - http://localhost:4200/posts/1   -> Post detail for id 1 (calls GET /api/Post/1)
+    - http://localhost:4200/login     -> Login form (calls POST /api/Login/login)
+    - http://localhost:4200/register  -> Register form (calls POST /api/Login/register)
+    - Existing valid login (from LE3/LE4 testing): username "rjvmaderas", password "2024108288"
+    - For the Register demo, use any NEW username of 16 characters or fewer - the Users table column is NVARCHAR(16), same limit discovered during LE4.
+    - Open DevTools (Ctrl+Shift+J) to show the console.log output of the returned posts/post, as the PDF requires.
+
+--------------------------------------------------
+6. TROUBLESHOOTING
+--------------------------------------------------
+BLANK PAGE / NOTHING LOADS
+    - This is expected right after `ng serve --open` per the PDF ("The page should be blank... open Developer Tools"); the console should still show the fetched data even if the page body looks sparse before templates render.
+
+CORS ERROR IN CONSOLE ("has been blocked by CORS policy")
+    - Confirm BlogAPI is running with the updated Program.cs (must include app.UseCors(...) BEFORE app.UseAuthentication()).
+    - Confirm Angular is running on port 4200 exactly (the policy only allows http://localhost:4200).
+    - Restart BlogAPI after any Program.cs change - CORS config only takes effect on a fresh run.
+
+CERTIFICATE / SSL ERRORS CALLING https://localhost:7161
+    - Run: dotnet dev-certs https --trust  (from a Developer Command Prompt), or let Visual Studio prompt you to trust the cert when you first run BlogAPI.
+    - If the browser still blocks it, open https://localhost:7161/api/Post directly once in the browser and accept/proceed past the certificate warning, then reload the Angular app.
+
+PORT ALREADY IN USE (4200 or 7161/5161)
+    - ng serve --port 4201 to use a different Angular port (you'd then also need to update the CORS origin in Program.cs to match).
+    - For the backend, close any other running BlogAPI/IIS Express instance, or check Properties\launchSettings.json.
+
+LOGIN "FAILS" IMMEDIATELY
+    - Double-check the username/password are correct for an existing user - the API returns 404 "User not found" for unknown users, which the app reports as a generic login error.
+    - Check the Network tab: the request body should be JSON { "username": ..., "password": ... } and the response should be a plain JWT string with Content-Type text/plain, not JSON.
+
+REGISTER "FAILS"
+    - The Users table caps UserName/Password at 16 characters - a longer value will fail at the database layer even though the request looks fine in the browser.

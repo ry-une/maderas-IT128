@@ -1,0 +1,52 @@
+IT128L - LE5: REQUIRED SCREENSHOT CHECKLIST
+Ryan Joseph V. Maderas
+===========================================
+
+Save these in order. Have BOTH BlogAPI (backend) and `ng serve` (frontend) running for all of them unless noted.
+
+01_ListPosts_Page.png
+- Browser at http://localhost:4200/
+- The list of posts visible, each showing title, first/last name, and dateCreated
+- DevTools console open (Ctrl+Shift+J) showing the console.log(this.posts) array from initData()
+
+02_ListPosts_TitleLink.png
+- Same page, mouse hovering (or address bar showing) the title link target /posts/{id}
+- Confirms the title is clickable and points to the correct post detail route
+
+03_PostDetail_Page.png
+- Browser at http://localhost:4200/posts/1 (or whichever post you clicked into)
+- Title, first/last name, dateCreated, and full body all visible
+- DevTools console showing console.log(this.post) for that single post
+
+04_Register_Page.png
+- Browser at http://localhost:4200/register
+- Form filled in with username/password/firstName/lastName (username 16 characters or fewer)
+- Right before or right after clicking Submit - if after, show the redirect to /login as proof it succeeded
+
+05_Login_Page.png
+- Browser at http://localhost:4200/login
+- Filled-in Email/Password fields
+- Successful login shown by the redirect back to the post list (URL bar showing http://localhost:4200/ again)
+
+06_Login_DevTools_Token.png
+- DevTools > Application tab > Session Storage > http://localhost:4200
+- The auth-token key visible with the JWT value saved, proving TokenStorageService.saveToken() worked
+
+07_Backend_Terminal_CORS.png
+- Visual Studio (or terminal) showing BlogAPI running on https://localhost:7161 with no CORS errors in the browser console while the above pages were loaded
+
+08_ProjectFolder_IDE.png
+- REQUIRED BY THE PDF: the entire project folder/path shown in the IDE (VS Code Explorer), expanded enough to clearly show:
+  MADERASLE4 > frontend > src > app > components (list-posts, post-detail, login-page, register-page), models, services
+- Make sure "MADERASLE4" (your surname folder, per the PDF's naming convention) is visible in the path/breadcrumb
+
+09_GitHub_Repo.png (optional but recommended)
+- Your GitHub repo page after pushing, showing the MADERASLE4 folder alongside MaderasLE2
+
+WORD FILE REQUIREMENTS
+- Put ALL screenshots above into the Word file, in this order.
+- Filename: LE5-1-MADERAS.docx
+
+VIDEO REQUIREMENT
+- Demonstrate the full frontend flow described in LE5_VIDEO_GUIDE.txt.
+- Filename: LE5-VID-MADERAS.mp4
