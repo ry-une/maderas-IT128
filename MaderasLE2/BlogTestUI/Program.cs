@@ -80,6 +80,12 @@ namespace BlogTestUI
         {
             UserModel user = GetCurrentUser(db);
 
+            if (user == null)
+            {
+                Console.WriteLine("Invalid credentials.");
+                return;
+            }
+
             Console.Write("Title: ");
             string title = Console.ReadLine();
 
